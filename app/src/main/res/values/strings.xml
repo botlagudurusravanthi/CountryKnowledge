@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Country Knowledge</string>
+    <string name="error_message">Loading data&#8230;\nEither your connection is slow or broken.</string>
+    <string name="image_description">Image container to load image from a URL</string>
 </resources>
