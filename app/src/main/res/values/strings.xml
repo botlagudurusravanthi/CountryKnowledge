@@ -2,4 +2,6 @@
     <string name="app_name">Country Knowledge</string>
     <string name="error_message">Loading data&#8230;\nEither your connection is slow or broken.</string>
     <string name="image_description">Image container to load image from a URL</string>
+    <string name="list_fragment_tag">CountryInfoListFragment</string>
+    <string name="country_info_url">https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json/</string>
 </resources>
