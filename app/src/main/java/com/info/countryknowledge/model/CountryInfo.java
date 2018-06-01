@@ -1,5 +1,7 @@
 package com.info.countryknowledge.model;
 
+import java.util.List;
+
 /**
  * Created by Sravanthi_B01 on 5/30/2018.
  *
@@ -9,13 +11,13 @@ package com.info.countryknowledge.model;
 public class CountryInfo {
 
     private String title;
-    private RowData rows[];
+    private List<RowData> rows;
 
     public String getTitle() {
         return title;
     }
 
-    public RowData[] getRows() {
+    public List<RowData> getRows() {
         return rows;
     }
 

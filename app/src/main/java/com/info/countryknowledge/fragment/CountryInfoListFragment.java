@@ -1,16 +1,19 @@
 package com.info.countryknowledge.fragment;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +25,8 @@ import com.info.countryknowledge.model.CountryInfo;
 import com.info.countryknowledge.model.RowData;
 import com.info.countryknowledge.presenter.CountryInfoListPresenter;
 import com.info.countryknowledge.view.CountryInfoListView;
+
+import java.util.List;
 
 /**
  * Created by Sravanthi_B01 on 5/29/2018.
@@ -38,6 +43,9 @@ public class CountryInfoListFragment extends Fragment implements CountryInfoList
     @BindView(R.id.error_message)
     TextView errorMessage;
 
+    @BindView(R.id.loadingPanel)
+    RelativeLayout loadingPanel;
+
     CountryInfoListPresenter countryInfoListPresenter;
     CountryInfoListAdapter adapter;
     Context context;
@@ -50,6 +58,7 @@ public class CountryInfoListFragment extends Fragment implements CountryInfoList
         errorMessage = view.findViewById(R.id.error_message);
         setRetainInstance(true);
         countryInfoListPresenter = new CountryInfoListPresenter();
+        showProgress(true);
         countryInfoListPresenter.queryListData(getString(R.string.country_info_url));
         context = this.getContext();
         ((MainActivity) getActivity()).setActionBarTitle("Country");
@@ -65,7 +74,6 @@ public class CountryInfoListFragment extends Fragment implements CountryInfoList
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.v("Fragment","Fragmen<<<<<<<<<<<<<<<<<<<<<<<<<<<   onActivityCreated    >>>>>>>>>>>>>>>>>>>>>");
         countryInfoListPresenter.setV(this);
     }
 
@@ -81,6 +89,8 @@ public class CountryInfoListFragment extends Fragment implements CountryInfoList
 
     @Override
     public void showListView(CountryInfo countryInfo) {
+       showProgress(false);
+       errorMessage.setVisibility(View.GONE);
        if(swipeRefreshLayout.isRefreshing()){
             swipeRefreshLayout.setRefreshing(false);
         }
@@ -91,23 +101,36 @@ public class CountryInfoListFragment extends Fragment implements CountryInfoList
 
     @Override
     public void showErrorView(String message) {
+        showProgress(false);
         if(swipeRefreshLayout.isRefreshing()){
             swipeRefreshLayout.setRefreshing(false);
         }
-        errorMessage.setText(message);
         errorMessage.setVisibility(View.VISIBLE);
+        errorMessage.setBackgroundColor(Color.RED);
     }
 
-    private void setAdapter(RowData[] rowData){
+    private void setAdapter(List<RowData> rowData){
         if(rowData != null){
             if(adapter == null){
                 adapter = new CountryInfoListAdapter(context);
             }
+            LinearLayoutManager manager = new LinearLayoutManager(context);
             recyclerList.setVisibility(View.VISIBLE);
             recyclerList.setAdapter(adapter);
-            recyclerList.setLayoutManager(new LinearLayoutManager(context));
+            recyclerList.setLayoutManager(manager);
+            DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerList.getContext(),
+                    manager.getOrientation());
+            recyclerList.addItemDecoration(mDividerItemDecoration);
             adapter.setRowData(rowData);
             adapter.notifyDataSetChanged();
+        }
+    }
+    public void showProgress(boolean show)
+    {
+        if(show) {
+            loadingPanel.setVisibility(View.VISIBLE);
+        }else{
+            loadingPanel.setVisibility(View.GONE);
         }
     }
 }

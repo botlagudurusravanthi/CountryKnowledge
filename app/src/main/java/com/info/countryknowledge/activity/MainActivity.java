@@ -2,6 +2,7 @@ package com.info.countryknowledge;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.info.countryknowledge.fragment.CountryInfoListFragment;
 
@@ -37,4 +38,5 @@ public class MainActivity extends AppCompatActivity {
     public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
     }
+
 }
