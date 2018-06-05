@@ -133,7 +133,7 @@ public class CountryInfoListFragment extends Fragment implements CountryInfoList
     * Shows the loading panel while loading the data based on value show
     *
     * */
-    public void showProgress(boolean show)
+    private void showProgress(boolean show)
     {
         if(show) {
             loadingPanel.setVisibility(View.VISIBLE);
