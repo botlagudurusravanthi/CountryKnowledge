@@ -12,7 +12,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by Sravanthi_B01 on 5/30/2018.
+ * This class query the data and update the view through CountryInfoListView
  */
 
 public class CountryInfoListPresenter extends BasePresenter<CountryInfoListView>{

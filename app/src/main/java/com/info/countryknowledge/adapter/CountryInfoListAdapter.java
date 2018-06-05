@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 /**
- * Created by Sravanthi_B01 on 5/29/2018.
+ * This class set the data to recycler view and displays the data.
  */
 
 public class CountryInfoListAdapter extends RecyclerView.Adapter<CountryInfoListAdapter.ListDataViewHolder> {

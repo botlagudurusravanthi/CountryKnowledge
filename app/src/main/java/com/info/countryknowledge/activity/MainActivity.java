@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.info.countryknowledge.fragment.CountryInfoListFragment;
-
+//This is mainclass which launches the fragment.
 public class MainActivity extends AppCompatActivity {
 
     private CountryInfoListFragment countryInfoListFragment;
@@ -28,13 +28,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     // This methods creates a new instance of CountryListViewFragment and attaches it to MainActivity
-    public void initiateFragment() {
+    private void initiateFragment() {
         countryInfoListFragment = new CountryInfoListFragment();
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, countryInfoListFragment, getResources().getString(R.string.list_fragment_tag))
                 .commit();
     }
-
+    //Set the Action bar title
     public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
     }

@@ -29,7 +29,7 @@ import com.info.countryknowledge.view.CountryInfoListView;
 import java.util.List;
 
 /**
- * Created by Sravanthi_B01 on 5/29/2018.
+ * This class contains the update methods for the views in the fragment.
  */
 
 public class CountryInfoListFragment extends Fragment implements CountryInfoListView{

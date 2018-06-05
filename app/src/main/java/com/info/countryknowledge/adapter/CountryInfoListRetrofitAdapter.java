@@ -6,7 +6,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by Sravanthi_B01 on 5/31/2018.
+ * This class creates the service to get the country data.
  */
 
 public class CountryInfoListRetrofitAdapter {

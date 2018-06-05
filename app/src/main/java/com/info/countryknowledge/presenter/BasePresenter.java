@@ -3,7 +3,7 @@ package com.info.countryknowledge.presenter;
 import java.lang.ref.WeakReference;
 
 /**
- * Created by Sravanthi_B01 on 5/31/2018.
+ * BasePresenter to get and set the view for the presenter.
  */
 
 public abstract class BasePresenter<V> {
