@@ -21,4 +21,11 @@ public class CountryInfo {
         return rows;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setRows(List<RowData> rows) {
+        this.rows = rows;
+    }
 }

@@ -20,6 +20,10 @@ public class RowData {
     }
 
     public String getImageHref() {
+        //Few images with http:// not loading like beavers
+        if(imageHref != null) {
+            imageHref = imageHref.replaceFirst("http://", "https://");
+        }
         return imageHref;
     }
 }

@@ -49,17 +49,19 @@ public class CountryInfoListAdapter extends RecyclerView.Adapter<CountryInfoList
         //  The placeholder image is a replacement for the time image is being loaded
         //  If the image couldn't be loaded the error image is displayed
         Picasso.with(context)
-                .load(singleRowData.getImageHref())
-                .resize(200,150)
-                .centerCrop()
-                .into(holder.imageContainer);
+                    .load(singleRowData.getImageHref())
+                    .resize(200, 150)
+                    .centerCrop()
+                    .into(holder.imageContainer);
     }
 
     @Override
     public int getItemCount() {
         return rowData.size();
     }
-
+       /*
+        * Set the row data and remove the row with empty data.
+        * */
     public void setRowData(List<RowData> countryInfoRows) {
         this.rowData = countryInfoRows;
         for(int i=0;i<rowData.size();i++){
@@ -85,6 +87,7 @@ public class CountryInfoListAdapter extends RecyclerView.Adapter<CountryInfoList
         }
     }
 
+   //Setting the width of the description textview to 60% of the screen to look the image at the same
     private void setDescriptionWidth(TextView desc){
         DisplayMetrics displaymetrics = context.getResources().getDisplayMetrics();
         int width =(int)(displaymetrics.widthPixels * 0.6 );

@@ -109,6 +109,9 @@ public class CountryInfoListFragment extends Fragment implements CountryInfoList
         errorMessage.setBackgroundColor(Color.RED);
     }
 
+    //
+    //* set the adapter to the recycler view, add the divider and set the row data to the adapter.
+    //*
     private void setAdapter(List<RowData> rowData){
         if(rowData != null){
             if(adapter == null){
@@ -118,6 +121,7 @@ public class CountryInfoListFragment extends Fragment implements CountryInfoList
             recyclerList.setVisibility(View.VISIBLE);
             recyclerList.setAdapter(adapter);
             recyclerList.setLayoutManager(manager);
+            //Divider added to the recycler list
             DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerList.getContext(),
                     manager.getOrientation());
             recyclerList.addItemDecoration(mDividerItemDecoration);
@@ -125,6 +129,10 @@ public class CountryInfoListFragment extends Fragment implements CountryInfoList
             adapter.notifyDataSetChanged();
         }
     }
+    /*
+    * Shows the loading panel while loading the data based on value show
+    *
+    * */
     public void showProgress(boolean show)
     {
         if(show) {
