@@ -3,20 +3,17 @@ package com.info.countryknowledge.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.info.countryknowledge.R;
 import com.info.countryknowledge.model.RowData;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,19 +37,29 @@ public class CountryInfoListAdapter extends RecyclerView.Adapter<CountryInfoList
     }
 
     @Override
-    public void onBindViewHolder(ListDataViewHolder holder, int position) {
-        RowData singleRowData =  rowData.get(position);
+    public void onBindViewHolder(final ListDataViewHolder holder, int position) {
+        final RowData singleRowData =  rowData.get(position);
         holder.itemTitle.setText(singleRowData.getTitle());
         holder.description.setText(singleRowData.getDescription());
         setDescriptionWidth(holder.description);
+
         //  Picasso Builder which renders images from URL
         //  The placeholder image is a replacement for the time image is being loaded
         //  If the image couldn't be loaded the error image is displayed
+
         Picasso.with(context)
                     .load(singleRowData.getImageHref())
                     .resize(200, 150)
                     .centerCrop()
-                    .into(holder.imageContainer);
+                    .into(holder.imageContainer, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                        }
+                        @Override
+                        public void onError() {
+                          loadImage(holder,singleRowData);
+                        }
+                    });
     }
 
     @Override
@@ -60,7 +67,7 @@ public class CountryInfoListAdapter extends RecyclerView.Adapter<CountryInfoList
         return rowData.size();
     }
        /*
-        * Set the row data and remove the row with empty data.
+        * Set the row data and remove the row with empty title.
         * */
     public void setRowData(List<RowData> countryInfoRows) {
         this.rowData = countryInfoRows;
@@ -94,5 +101,17 @@ public class CountryInfoListAdapter extends RecyclerView.Adapter<CountryInfoList
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) desc.getLayoutParams();
         params.width =width;
         desc.setLayoutParams(params);
+    }
+    // Few images are not loading with http:// so replacing with https:// only when we get loaderror
+    private void loadImage(ListDataViewHolder holder,RowData singleRowData){
+        String url = singleRowData.getImageHref();
+        if(url.contains("http://")) {
+            url = url.replace("http://", "https://");
+            Picasso.with(context)
+                    .load(url)
+                    .resize(200, 150)
+                    .centerCrop()
+                    .into(holder.imageContainer);
+        }
     }
 }
