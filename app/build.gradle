@@ -40,7 +40,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     //RecyclerView
-    compile 'com.android.support:recyclerview-v7:27.1.0'
+    implementation 'com.android.support:recyclerview-v7:27.1.0'
 
     //Retrofit Lib for REST Services
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
