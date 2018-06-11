@@ -35,6 +35,7 @@ public class CountryInfoListPresenterTest {
     @Mock
     Response<CountryInfo> response;
 
+
     @Test
     public void testSuccessfulResponse()throws Exception{
        presenter = new CountryInfoListPresenter();
@@ -73,8 +74,7 @@ public class CountryInfoListPresenterTest {
                 retrofit2.Callback<CountryInfo> callback = invocation.getArgumentAt(0, retrofit2.Callback.class);
 
                 callback.onResponse(mockedCall, Response.success(new CountryInfo()));
-               // callback.onResponse(mockedCall, Response.error(404. ...);
-                 callback.onFailure(mockedCall, new IOException());
+                callback.onFailure(mockedCall, new IOException());
 
                 return null;
             }

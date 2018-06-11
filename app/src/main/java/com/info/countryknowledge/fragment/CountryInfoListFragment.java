@@ -49,6 +49,7 @@ public class CountryInfoListFragment extends Fragment implements CountryInfoList
     CountryInfoListPresenter countryInfoListPresenter;
     CountryInfoListAdapter adapter;
     Context context;
+    MainActivity mMainActivity;
 
     @Nullable
     @Override
@@ -58,10 +59,12 @@ public class CountryInfoListFragment extends Fragment implements CountryInfoList
         errorMessage = view.findViewById(R.id.error_message);
         setRetainInstance(true);
         countryInfoListPresenter = new CountryInfoListPresenter();
+        mMainActivity = (MainActivity) getActivity();
+        mMainActivity.setActionBarTitle("Country");
         showProgress(true);
         countryInfoListPresenter.queryListData(getString(R.string.country_info_url));
         context = this.getContext();
-        ((MainActivity) getActivity()).setActionBarTitle("Country");
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -84,7 +87,7 @@ public class CountryInfoListFragment extends Fragment implements CountryInfoList
 
     @Override
     public void updateTitle(String title) {
-        ((MainActivity) getActivity()).setActionBarTitle(title);
+        mMainActivity.setActionBarTitle(title);
     }
 
     @Override
@@ -141,4 +144,5 @@ public class CountryInfoListFragment extends Fragment implements CountryInfoList
             loadingPanel.setVisibility(View.GONE);
         }
     }
+
 }

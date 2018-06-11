@@ -20,33 +20,41 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:27.1.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.powermock:powermock-api-mockito:1.6.2'
-    testCompile 'org.powermock:powermock-module-junit4-rule-agent:1.6.2'
-    testCompile 'org.powermock:powermock-module-junit4-rule:1.6.2'
-    testCompile 'org.powermock:powermock-module-junit4:1.6.2'
-    testCompile  'com.squareup.okhttp3:mockwebserver:3.8.0'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.powermock:powermock-api-mockito:1.6.2'
+    testImplementation 'org.powermock:powermock-module-junit4-rule-agent:1.6.2'
+    testImplementation 'org.powermock:powermock-module-junit4-rule:1.6.2'
+    testImplementation 'org.powermock:powermock-module-junit4:1.6.2'
+    testImplementation  'com.squareup.okhttp3:mockwebserver:3.8.0'
 
     //Lib to support Instrumentation Test Cases
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
+    androidTestImplementation('com.android.support.test.espresso:espresso-contrib:2.2.1') {
+        // Necessary to avoid version conflicts
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+    }
+    androidTestImplementation 'com.squareup.okhttp:mockwebserver:2.7.2'
     //Butterknife Lib for View Binding
-    compile 'com.jakewharton:butterknife:8.8.1'
+    implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     //RecyclerView
     implementation 'com.android.support:recyclerview-v7:27.1.0'
 
     //Retrofit Lib for REST Services
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 
     //Picasso Lib to render images from a URL
-    compile 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 
 }

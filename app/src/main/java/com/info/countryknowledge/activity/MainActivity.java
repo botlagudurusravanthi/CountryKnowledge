@@ -2,13 +2,17 @@ package com.info.countryknowledge;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+
 
 import com.info.countryknowledge.fragment.CountryInfoListFragment;
+
+import java.io.File;
+
 //This is mainclass which launches the fragment.
 public class MainActivity extends AppCompatActivity {
 
     private CountryInfoListFragment countryInfoListFragment;
+    public static File cacheDir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +37,10 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, countryInfoListFragment, getResources().getString(R.string.list_fragment_tag))
                 .commit();
+        cacheDir = getCacheDir();
     }
     //Set the Action bar title
     public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
     }
-
-}
+ }
